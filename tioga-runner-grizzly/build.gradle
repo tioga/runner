@@ -1,0 +1,10 @@
+project(":tioga-runner-grizzly") {
+
+  version = "1.0.0"
+
+  dependencies {
+    compile("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.16")
+  }
+
+  apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-deployer.gradle")
+}

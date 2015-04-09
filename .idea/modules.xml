@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/runner.iml" filepath="$PROJECT_DIR$/runner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tioga-runner-grizzly/tioga-runner-grizzly.iml" filepath="$PROJECT_DIR$/tioga-runner-grizzly/tioga-runner-grizzly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tioga-runner-jersey-spring/tioga-runner-jersey-spring.iml" filepath="$PROJECT_DIR$/tioga-runner-jersey-spring/tioga-runner-jersey-spring.iml" />
+    </modules>
+  </component>
+</project>
