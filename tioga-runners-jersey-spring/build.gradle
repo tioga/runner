@@ -1,4 +1,4 @@
-project(":tioga-runner-jersey-spring") {
+project(":tioga-runners-jersey-spring") {
 
   version = "1.0.0"
 

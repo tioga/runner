@@ -1,4 +1,4 @@
-package org.tiogasolutions.runner.jersey.support;
+package org.tiogasolutions.runners.jersey.support;
 
 import org.glassfish.hk2.api.Factory;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;

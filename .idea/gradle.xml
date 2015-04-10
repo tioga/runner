@@ -10,8 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/tioga-runner-grizzly" />
-            <option value="$PROJECT_DIR$/tioga-runner-jersey-spring" />
+            <option value="$PROJECT_DIR$/tioga-runners-grizzly" />
+            <option value="$PROJECT_DIR$/tioga-runners-jersey-spring" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -1,4 +1,4 @@
-package org.tiogasolutions.runner.grizzly;
+package org.tiogasolutions.runners.grizzly;
 
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;

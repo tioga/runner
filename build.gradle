@@ -29,7 +29,7 @@ apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-
 
 subprojects {
 
-  group = "org.tiogasolutions.runner"
+  group = "org.tiogasolutions.runners"
 
   apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-reports.gradle")
   apply(from: "https://raw.githubusercontent.com/tioga/build-scripts/master/build-config-versions.gradle")
