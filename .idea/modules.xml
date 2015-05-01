@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/runners.iml" filepath="$PROJECT_DIR$/runners.iml" />
       <module fileurl="file://$PROJECT_DIR$/tioga-runners-grizzly/tioga-runners-grizzly.iml" filepath="$PROJECT_DIR$/tioga-runners-grizzly/tioga-runners-grizzly.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-runners-jersey-spring/tioga-runners-jersey-spring.iml" filepath="$PROJECT_DIR$/tioga-runners-jersey-spring/tioga-runners-jersey-spring.iml" />
     </modules>
   </component>
 </project>

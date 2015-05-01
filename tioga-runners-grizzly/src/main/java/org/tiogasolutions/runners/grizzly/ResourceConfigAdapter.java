@@ -1,4 +1,4 @@
-package org.tiogasolutions.runners.jersey.support;
+package org.tiogasolutions.runners.grizzly;
 
 import org.glassfish.jersey.server.ResourceConfig;
 

@@ -11,7 +11,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/tioga-runners-grizzly" />
-            <option value="$PROJECT_DIR$/tioga-runners-jersey-spring" />
           </set>
         </option>
       </GradleProjectSettings>

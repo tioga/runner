@@ -1,6 +1,6 @@
 project(":tioga-runners-grizzly") {
 
-  version = "1.0.1"
+  version = "1.0.2"
 
   dependencies {
     compile("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.17")
