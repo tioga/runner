@@ -70,7 +70,7 @@ public class GrizzlyServer {
     try {
       doStart(resourceConfig);
 
-      logger.warn(format("Application started with WADL available at %sapplication.wadl", getBaseUri()));
+      logger.info(format("Application started with WADL available at %sapplication.wadl", getBaseUri()));
 
       if (config.isToOpenBrowser()) {
         URI baseUri = getBaseUri();
