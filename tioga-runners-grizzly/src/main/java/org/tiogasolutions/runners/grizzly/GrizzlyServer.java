@@ -70,7 +70,8 @@ public class GrizzlyServer {
     try {
       doStart(resourceConfig);
 
-      logger.info(format("Application started with WADL available at %sapplication.wadl", getBaseUri()));
+      logger.info(format("Application started at %s", getBaseUri()));
+      logger.info(format("WADL available at %sapplication.wadl", getBaseUri()));
 
       if (config.isToOpenBrowser()) {
         URI baseUri = getBaseUri();
@@ -102,11 +103,11 @@ public class GrizzlyServer {
         socket = new ServerSocket(config.getShutdownPort());
         socket.setSoTimeout(socketAcceptTimeoutMilli);
 
-        String msg = format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), config.getShutdownPort(), socket.getInetAddress().getHostAddress());
+        String msg = format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), config.getPort(), socket.getInetAddress().getHostAddress());
         logger.info(msg);
 
       } catch(IOException ex) {
-        String msg = format("IOException starting server socket, maybe port %s was not available.", config.getShutdownPort());
+        String msg = format("IOException starting server socket, maybe port %s was not available.", config.getPort());
         logger.error(msg, ex);
       }
 

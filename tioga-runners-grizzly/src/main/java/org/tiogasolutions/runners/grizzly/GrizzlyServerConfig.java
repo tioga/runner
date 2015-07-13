@@ -105,6 +105,10 @@ public class GrizzlyServerConfig {
    * @return the property's value.
    */
   public URI getBaseUri() {
-    return URI.create("http://"+ hostName +":"+ port+"/"+context+"/");
+    if (context == null || context.trim().isEmpty()) {
+      return URI.create("http://"+ hostName +":"+ port+"/");
+    } else {
+      return URI.create("http://"+ hostName +":"+ port+"/"+context+"/");
+    }
   }
 }
