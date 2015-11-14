@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-include "tioga-runners-grizzly"
+include "tioga-runners-grizzly", "tioga-runners-spring-grizzly"
