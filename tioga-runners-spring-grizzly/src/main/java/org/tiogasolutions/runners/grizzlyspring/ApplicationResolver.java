@@ -32,7 +32,7 @@ public interface ApplicationResolver {
    * @param applicationClass the class of the specific Application to be extracted from the bean factory.
    * @return the application resolver.
    */
-  public static ApplicationResolver fromApplicationClass(final Class<? extends Application> applicationClass) {
+  public static ApplicationResolver fromClass(final Class<? extends Application> applicationClass) {
     return new ApplicationResolver() {
       @Override
       public Application getApplication(BeanFactory factory) {

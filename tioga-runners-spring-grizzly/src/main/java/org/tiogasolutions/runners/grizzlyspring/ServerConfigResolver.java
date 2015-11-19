@@ -31,7 +31,7 @@ public interface ServerConfigResolver {
    * @param grizzlyServerConfigClass the class of the specific GrizzlyServerConfig to be extracted from the bean factory.
    * @return the server config resolver.
    */
-  public static ServerConfigResolver fromClassName(final Class<? extends GrizzlyServerConfig> grizzlyServerConfigClass) {
+  public static ServerConfigResolver fromClass(final Class<? extends GrizzlyServerConfig> grizzlyServerConfigClass) {
     return new ServerConfigResolver() {
       @Override
       public GrizzlyServerConfig getConfig(BeanFactory factory) {
@@ -42,14 +42,14 @@ public interface ServerConfigResolver {
 
   /**
    * Simply returns the specified GrizzlyServerConfig.
-   * @param grizzlyServerConfig the actual instance of GrizzlyServerConfig to be used.
+   * @param serverConfig the actual instance of GrizzlyServerConfig to be used.
    * @return the server config resolver.
    */
-  public static ServerConfigResolver fromApplication(final GrizzlyServerConfig grizzlyServerConfig) {
+  public static ServerConfigResolver fromConfig(final GrizzlyServerConfig serverConfig) {
     return new ServerConfigResolver() {
       @Override
       public GrizzlyServerConfig getConfig(BeanFactory factory) {
-        return grizzlyServerConfig;
+        return serverConfig;
       }
     };
   }

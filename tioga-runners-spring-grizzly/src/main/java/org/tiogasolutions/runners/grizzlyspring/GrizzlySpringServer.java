@@ -1,11 +1,11 @@
 package org.tiogasolutions.runners.grizzlyspring;
 
-import org.glassfish.jersey.server.spring.SpringLifecycleListener;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
-import org.springframework.core.io.Resource;
+import org.springframework.context.support.AbstractXmlApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerSupport;
 
 public class GrizzlySpringServer extends GrizzlyServerSupport {
@@ -32,14 +32,14 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
    * @param serverConfigResolver utility to resolve an instance of the GrizzlyServerConfig class.
    * @param applicationResolver utility to resolve an instance of the Application class.
    * @param activeProfiles a comma separated list of Spring profiles to be activated.
-   * @param resources a list of Resources by which to initialize the GenericXmlApplicationContext.
+   * @param xmlConfigPath the path to the Spring XML config file..
    */
   public GrizzlySpringServer(ServerConfigResolver serverConfigResolver,
                              ApplicationResolver applicationResolver,
                              String activeProfiles,
-                             Resource...resources) {
+                             String xmlConfigPath) {
 
-    this(serverConfigResolver, applicationResolver, createGenericXmlApplicationContext(activeProfiles, resources));
+    this(serverConfigResolver, applicationResolver, createXmlConfigApplicationContext(activeProfiles, xmlConfigPath));
   }
 
   /**
@@ -57,7 +57,7 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
 
     this.applicationContext = applicationContext;
 
-    resourceConfig.register(SpringLifecycleListener.class);
+    // resourceConfig.register(SpringLifecycleListener.class);
     resourceConfig.register(RequestContextFilter.class);
     resourceConfig.property("contextConfig", applicationContext);
   }
@@ -70,8 +70,17 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
     return applicationContext;
   }
 
-  public static GenericXmlApplicationContext createGenericXmlApplicationContext(String activeProfiles, Resource[] resources) {
-    GenericXmlApplicationContext applicationContext = new GenericXmlApplicationContext(resources);
+  public static AbstractXmlApplicationContext createXmlConfigApplicationContext(String activeProfiles, String xmlConfigPath) {
+
+    AbstractXmlApplicationContext applicationContext;
+
+    if (xmlConfigPath.startsWith("classpath:")) {
+      applicationContext = new ClassPathXmlApplicationContext();
+    } else {
+      applicationContext = new FileSystemXmlApplicationContext();
+    }
+
+    applicationContext.setConfigLocation(xmlConfigPath);
     applicationContext.getEnvironment().setActiveProfiles(split(activeProfiles));
     applicationContext.refresh();
     return applicationContext;

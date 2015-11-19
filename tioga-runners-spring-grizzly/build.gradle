@@ -6,6 +6,9 @@ project(":tioga-runners-spring-grizzly") {
     compile(project(":tioga-runners-grizzly"))
     compile("org.glassfish.jersey.ext:jersey-spring3:2.17")
 
+    compile("org.springframework:spring-core:4.1.6.RELEASE") {force = true}
+    compile("org.springframework:spring-beans:4.1.6.RELEASE") {force = true}
+
     testCompile ("org.testng:testng:6.8.21")
   }
 

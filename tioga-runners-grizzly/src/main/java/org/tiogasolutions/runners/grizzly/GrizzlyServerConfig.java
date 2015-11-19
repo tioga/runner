@@ -2,9 +2,6 @@ package org.tiogasolutions.runners.grizzly;
 
 import java.lang.String;import java.net.URI;
 
-/**
- * Created by harlan on 3/7/15.
- */
 public class GrizzlyServerConfig {
 
   private String hostName = "localhost";
