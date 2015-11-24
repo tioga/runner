@@ -10,6 +10,7 @@ public class GrizzlyServerConfig {
   private int shutdownPort = 8005;
   private String context;
   private boolean toOpenBrowser;
+  private long shutdownTimeout = 10*1000;
 
   /**
    * Identifies the host name for the server.
@@ -107,5 +108,17 @@ public class GrizzlyServerConfig {
     } else {
       return URI.create("http://"+ hostName +":"+ port+"/"+context+"/");
     }
+  }
+
+  /**
+   * Identifies the number of milliseconds to wait for the server to shut down.
+   * @return the property's value.
+   */
+  public long getShutdownTimeout() {
+    return shutdownTimeout;
+  }
+
+  public void setShutdownTimeout(long shutdownTimeout) {
+    this.shutdownTimeout = shutdownTimeout;
   }
 }

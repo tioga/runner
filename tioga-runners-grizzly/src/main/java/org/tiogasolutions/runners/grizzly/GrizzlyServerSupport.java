@@ -7,10 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.core.Application;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.Socket;
 import java.net.URI;
 
 public abstract class GrizzlyServerSupport {
@@ -58,7 +54,7 @@ public abstract class GrizzlyServerSupport {
   public void start() {
     try {
       // If it's running, shut it down.
-      shutdownRemote(serverConfig);
+      ShutdownUtils.shutdownRemote(serverConfig);
 
       // Create a new instance of our server.
       httpServer = GrizzlyHttpServerFactory.createHttpServer(serverConfig.getBaseUri(), resourceConfig);
@@ -91,21 +87,6 @@ public abstract class GrizzlyServerSupport {
   public void shutdownThis() {
     if (httpServer != null) {
       httpServer.shutdown();
-    }
-  }
-
-  /**
-   * Attempts to shutdown a Grizzly server running on with the specified hostName and shutdownPort.
-   * @param config the server config which defines the respective host name and shutdown port.
-   * @throws IOException upon failure.
-   */
-  public static void shutdownRemote(GrizzlyServerConfig config) throws IOException {
-    try(Socket localSocket = new Socket(config.getHostName(), config.getShutdownPort())) {
-      try(OutputStream outStream = localSocket.getOutputStream()) {
-        outStream.write("SHUTDOWN".getBytes());
-        outStream.flush();
-      }
-    } catch (ConnectException ignored) {
     }
   }
 

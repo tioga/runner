@@ -1,6 +1,6 @@
 project(":tioga-runners-spring-grizzly") {
 
-  version = "1.0.2"
+  version = "1.0.3"
 
   dependencies {
     compile(project(":tioga-runners-grizzly"))
