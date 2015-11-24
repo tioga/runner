@@ -17,7 +17,7 @@ import static java.lang.String.format;
 
 public class ShutdownHandler {
 
-  private static final Logger log = LoggerFactory.getLogger(GrizzlyServer.class);
+  private static final Logger log = LoggerFactory.getLogger(ShutdownHandler.class);
 
   private static final int socketAcceptTimeoutMilli = 5000;
 
@@ -56,8 +56,7 @@ public class ShutdownHandler {
         acceptThread = new Thread(this::socketAcceptLoop);
         acceptThread.start();
 
-        String msg = format("%s is accepting connections on port %s from %s.", getClass().getSimpleName(), config.getShutdownPort(), socket.getInetAddress().getHostAddress());
-        log.info(msg);
+        log.info("{} is accepting connections on port {} from {}.", getClass().getSimpleName(), config.getShutdownPort(), socket.getInetAddress().getHostAddress());
 
       } finally {
         // Be sure to always give up the lock.
@@ -86,7 +85,6 @@ public class ShutdownHandler {
         // Ensure we have not stopped or been interrupted.
         if (acceptThread == null || Thread.interrupted()) {
           log.info("Looks like SocketHandler has been stopped, terminate our acceptLoop.");
-          System.out.println("Looks like SocketHandler has been stopped, terminate our acceptLoop.");
           return;
         }
 
@@ -101,7 +99,6 @@ public class ShutdownHandler {
           builder.append((char)val);
           if ("SHUTDOWN".equals(builder.toString())) {
             log.info("Shutdown command received.");
-            System.out.println("Shutdown command received.");
             httpServer.shutdownNow();
             System.exit(0);
           }
@@ -112,7 +109,6 @@ public class ShutdownHandler {
 
       } catch (Throwable ex) {
         log.error("Unexpected exception", ex);
-        System.out.println("Unexpected exception");
         ex.printStackTrace();
         return;
 

@@ -13,8 +13,6 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.URI;
 
-import static java.lang.String.format;
-
 public abstract class GrizzlyServerSupport {
 
   private static final Logger log = LoggerFactory.getLogger(GrizzlyServerSupport.class);
@@ -65,11 +63,11 @@ public abstract class GrizzlyServerSupport {
       // Create a new instance of our server.
       httpServer = GrizzlyHttpServerFactory.createHttpServer(serverConfig.getBaseUri(), resourceConfig);
 
+      log.info("Application started at {}", getBaseUri());
+      log.info("WADL available at {}application.wadl", getBaseUri());
+
       // Start our own shutdown handler.
       createShutdownHandler().start(httpServer);
-
-      log.info(format("Application started at %s", getBaseUri()));
-      log.info(format("WADL available at %sapplication.wadl", getBaseUri()));
 
       if (serverConfig.isToOpenBrowser()) {
         URI baseUri = getBaseUri();
