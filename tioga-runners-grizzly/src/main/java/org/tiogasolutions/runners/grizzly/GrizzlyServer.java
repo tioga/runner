@@ -9,6 +9,10 @@ public class GrizzlyServer extends GrizzlyServerSupport {
 
   private static final Logger log = LoggerFactory.getLogger(GrizzlyServer.class);
 
+  public static final Class<?>[] GRIZZLY_CLASSES = new Class[]{
+      GrizzlyServer.class, GrizzlyServerConfig.class, GrizzlyServerSupport.class, ShutdownHandler.class
+  };
+
   public GrizzlyServer(GrizzlyServerConfig serverConfig, Application application) {
     super(serverConfig, application);
   }

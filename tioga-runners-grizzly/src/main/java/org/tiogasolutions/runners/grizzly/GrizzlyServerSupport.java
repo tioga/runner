@@ -70,6 +70,7 @@ public abstract class GrizzlyServerSupport {
       createShutdownHandler().start(httpServer);
 
       if (serverConfig.isToOpenBrowser()) {
+        log.info("Opening web browser to {}", getBaseUri());
         URI baseUri = getBaseUri();
         java.awt.Desktop.getDesktop().browse(baseUri);
       }

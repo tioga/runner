@@ -1,4 +1,4 @@
-package org.tiogasolutions.runners.grizzlyspring;
+package org.tiogasolutions.runners.grizzly.spring;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
