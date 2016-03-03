@@ -2,10 +2,6 @@ package org.tiogasolutions.runners.grizzly.spring;
 
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.AbstractXmlApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerConfig;
 import org.tiogasolutions.runners.grizzly.GrizzlyServerSupport;
 import org.tiogasolutions.runners.grizzly.ShutdownHandler;
@@ -30,7 +26,7 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
                              String activeProfiles,
                              Class<?>...annotatedClasses) {
 
-    this(serverConfigResolver, applicationResolver, createAnnotationConfigApplicationContext(activeProfiles, annotatedClasses));
+    this(serverConfigResolver, applicationResolver, SpringUtils.createAnnotationConfigApplicationContext(activeProfiles, annotatedClasses));
   }
 
   /**
@@ -45,7 +41,7 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
                              String activeProfiles,
                              String xmlConfigPath) {
 
-    this(serverConfigResolver, applicationResolver, createXmlConfigApplicationContext(activeProfiles, xmlConfigPath));
+    this(serverConfigResolver, applicationResolver, SpringUtils.createXmlConfigApplicationContext(activeProfiles, xmlConfigPath));
   }
 
   /**
@@ -66,38 +62,6 @@ public class GrizzlySpringServer extends GrizzlyServerSupport {
     // resourceConfig.register(SpringLifecycleListener.class);
     resourceConfig.register(RequestContextFilter.class);
     resourceConfig.property("contextConfig", applicationContext);
-  }
-
-  public static AnnotationConfigApplicationContext createAnnotationConfigApplicationContext(String activeProfiles, Class<?>[] annotatedClasses) {
-    AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-    applicationContext.getEnvironment().setActiveProfiles(split(activeProfiles));
-    applicationContext.register(annotatedClasses);
-    applicationContext.refresh();
-    return applicationContext;
-  }
-
-  public static AbstractXmlApplicationContext createXmlConfigApplicationContext(String activeProfiles, String xmlConfigPath) {
-
-    AbstractXmlApplicationContext applicationContext;
-
-    if (xmlConfigPath.startsWith("classpath:")) {
-      applicationContext = new ClassPathXmlApplicationContext();
-    } else {
-      applicationContext = new FileSystemXmlApplicationContext();
-    }
-
-    applicationContext.setConfigLocation(xmlConfigPath);
-    applicationContext.getEnvironment().setActiveProfiles(split(activeProfiles));
-    applicationContext.refresh();
-    return applicationContext;
-  }
-
-  private static String[] split(String activeProfiles) {
-    String[] values = (activeProfiles == null) ? new String[0] : activeProfiles.split(",");
-    for (int i = 0; i < values.length; i++) {
-      values[i] = values[i].trim();
-    }
-    return values;
   }
 
   public ApplicationContext getApplicationContext() {
