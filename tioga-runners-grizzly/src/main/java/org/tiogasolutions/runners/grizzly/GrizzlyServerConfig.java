@@ -10,7 +10,7 @@ public class GrizzlyServerConfig {
   private int shutdownPort = 8005;
   private String context;
   private boolean toOpenBrowser;
-  private long shutdownTimeout = 10*1000;
+  private long shutdownTimeout = 30*1000;
 
   /**
    * Identifies the host name for the server.

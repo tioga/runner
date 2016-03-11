@@ -1,8 +1,10 @@
 project(":tioga-runners-grizzly") {
 
-  version = "2.0.0"
+  version = "2.1.0"
 
   dependencies {
+    compile("org.tiogasolutions.app:tioga-app-common:+");
+
     compile("org.slf4j:slf4j-api:1.7.7")
     compile("org.glassfish.jersey.containers:jersey-container-grizzly2-http:2.17")
 
