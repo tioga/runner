@@ -3,9 +3,6 @@ package org.tiogasolutions.runners.grizzly;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tiogasolutions.app.common.App;
-import org.tiogasolutions.app.common.status.AppStatus;
-import org.tiogasolutions.app.common.status.ChangeAppStatus;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,10 +29,8 @@ public class ShutdownHandler {
 
   /** handlerLock is used to synchronize access to socket, acceptThread and callExecutor. */
   private final ReentrantLock handlerLock = new ReentrantLock();
-  private final App app;
 
-  public ShutdownHandler(App app, GrizzlyServerConfig config) {
-    this.app = app;
+  public ShutdownHandler(GrizzlyServerConfig config) {
     this.config = config;
   }
 
@@ -75,9 +70,7 @@ public class ShutdownHandler {
   }
 
   protected void shutdownIn30() {
-    app.execute(new ChangeAppStatus(AppStatus.RESTRICTED, "Shutting down gracefully (30 seconds max)"));
     httpServer.shutdown(30, TimeUnit.SECONDS);
-    app.execute(new ChangeAppStatus(AppStatus.DISABLED, "Offline"));
   }
 
   protected void socketAcceptLoop() {

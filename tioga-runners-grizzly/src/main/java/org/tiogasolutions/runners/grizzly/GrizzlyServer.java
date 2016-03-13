@@ -5,21 +5,15 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.tiogasolutions.app.common.App;
-import org.tiogasolutions.app.common.status.AppInfo;
-import org.tiogasolutions.app.common.status.AppStatus;
-import org.tiogasolutions.app.common.status.ChangeAppStatus;
-import org.tiogasolutions.app.common.status.ChangeAppTestUser;
 
 import javax.ws.rs.core.Application;
 import java.net.URI;
 import java.util.concurrent.TimeUnit;
 
-public class GrizzlyServer implements App {
+public class GrizzlyServer {
 
   private static final Logger log = LoggerFactory.getLogger(GrizzlyServer.class);
 
-  protected AppInfo appInfo;
   protected HttpServer httpServer;
 
   protected final ResourceConfig resourceConfig;
@@ -28,7 +22,6 @@ public class GrizzlyServer implements App {
   public GrizzlyServer(GrizzlyServerConfig serverConfig, Application application) {
     this.serverConfig = serverConfig;
     this.resourceConfig = ResourceConfig.forApplication(application);
-    this.appInfo = new AppInfo(AppStatus.UNKNOWN, "Not Started.", null, null);
   }
 
   /**
@@ -69,8 +62,6 @@ public class GrizzlyServer implements App {
   /** Starts the server. */
   public void start() {
     try {
-      execute(new ChangeAppStatus(AppStatus.STARTING, "Not Started."));
-
       // If it's running, shut it down.
       ShutdownUtils.shutdownRemote(serverConfig);
 
@@ -89,8 +80,6 @@ public class GrizzlyServer implements App {
         java.awt.Desktop.getDesktop().browse(baseUri);
       }
 
-      execute(new ChangeAppStatus(AppStatus.ENABLED, "Application enabled."));
-
       Thread.currentThread().join();
 
     } catch (Throwable e) {
@@ -100,17 +89,14 @@ public class GrizzlyServer implements App {
   }
 
   protected ShutdownHandler createShutdownHandler() {
-    return new ShutdownHandler(this, serverConfig);
+    return new ShutdownHandler(serverConfig);
   }
 
   /** Shuts down *this* currently running Grizzly server. */
-  @Override
-  public AppInfo shutdown() {
-    execute(new ChangeAppStatus(AppStatus.RESTRICTED, "Shutting down gracefully (30 seconds max)"));
+  public void shutdown() {
     if (httpServer != null) {
       httpServer.shutdown(30, TimeUnit.SECONDS);
     }
-    return execute(new ChangeAppStatus(AppStatus.DISABLED, "Offline"));
   }
 
   public void register(Class type) {
@@ -119,30 +105,5 @@ public class GrizzlyServer implements App {
 
   public void packages(String...packages) {
     resourceConfig.packages(packages);
-  }
-
-  @Override
-  public AppInfo getAppInfo() {
-    return appInfo;
-  }
-
-  @Override
-  public AppInfo execute(ChangeAppStatus change) {
-    return appInfo = new AppInfo(
-        change.getStatus(),
-        change.getMessage(),
-        appInfo.getTestEmailAddress(),
-        appInfo.getTestPassword()
-    );
-  }
-
-  @Override
-  public AppInfo execute(ChangeAppTestUser change) {
-    return appInfo = new AppInfo(
-        appInfo.getStatus(),
-        appInfo.getMessage(),
-        change.getTestEmailAddress(),
-        change.getTestPassword()
-    );
   }
 }
