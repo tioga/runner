@@ -1,6 +1,6 @@
 project(":tioga-runners-grizzly") {
 
-  version = "2.2.2"
+  version = "2.2.3"
 
   dependencies {
     compile("org.slf4j:slf4j-api:1.7.20")
