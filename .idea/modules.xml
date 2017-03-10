@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/runners.iml" filepath="$PROJECT_DIR$/runners.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tioga-runners-grizzly/tioga-runners-grizzly.iml" filepath="$PROJECT_DIR$/tioga-runners-grizzly/tioga-runners-grizzly.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/runners.iml" filepath="$PROJECT_DIR$/.idea/modules/runners.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly.iml" group="tioga-runners-grizzly" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly_main.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly_main.iml" group="tioga-runners-grizzly" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly_test.iml" filepath="$PROJECT_DIR$/.idea/modules/tioga-runners-grizzly/tioga-runners-grizzly_test.iml" group="tioga-runners-grizzly" />
     </modules>
   </component>
 </project>
